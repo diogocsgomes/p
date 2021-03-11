@@ -1,0 +1,35 @@
+
+.header {
+    padding: 10px;
+    text-align: right;
+    text-decoration: white;
+    background: #2f3131;
+    color: white;
+    font-size: 15px;
+}
+
+.button {
+    box-align:right;
+    background-color: #ffffff; 
+    border: solid transparent;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    padding: 2px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+} 
+
+.titulo{
+    padding: 1px;
+    text-align: center;
+    text-decoration: white;
+    background: #2f3131;
+    color: white;
+    font-size: 30px;
+}
+
+.table{
+    box-align: center;
+}

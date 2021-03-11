@@ -29,7 +29,7 @@ else
 }
 */
 
-
+//ola
     if (isset($_POST['signup'])){
         $username = $_POST['username'];
         $email = $_POST['email'];

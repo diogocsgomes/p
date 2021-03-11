@@ -17,6 +17,7 @@ if(isset($_POST['submit'])){
     $codigo =$_POST['codigo'];
     $id_criador = $_SESSION['id'];
     
+    
     $sql = "INSERT INTO salas(id_criador,nome,codigo) VALUES('". $id_criador ."','". $nome ."', '" .$codigo. "' )";
 
     //mkdir('salas\\' . $nome. '');
@@ -27,7 +28,7 @@ if(isset($_POST['submit'])){
     }
 }
 
- 
+
 
 
 

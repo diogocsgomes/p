@@ -5,11 +5,11 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 {
     header('location:login.html');
 }
-//$id_sala = random_int(1,10);
+$id_sala = random_int(1,10);
 //(string)$id_pasta;
-$utilizadores_id = $_SESSION['id'];
+//$utilizadores_id = $_SESSION['id'];
 //echo($utilizadores_id);
-$designacao = "teste";
+//$designacao = "teste";
 //$nome_original = "teste2";
 
 
@@ -20,12 +20,18 @@ if(isset($_POST['upload'])) {
     $file_size = $_FILES['file']['size'];
     $file_tem_Loc = $_FILES['file']['tmp_name'];
     $file_store = "upload/".$file_name;
+    //$file_store = "utilizadores//'.$_SESSION['username'].'//'.$nome".$file_name;    
+    $utilizadores_id = $_SESSION['id'];
+    $designacao = $utilizadores_id.$file_name; 
+    //$file_store = 'utilizadores\\'.$_SESSION['username'];
+   // mkdir('utilizadores\\'.$_SESSION['username'].'\\'.$nome);
+
     
     //$designacao = $id_pasta +"_"+ $file_name;
 
     if (move_uploaded_file($file_tem_Loc,$file_store)){
         echo "os ficheiros foram enviados";
-        $sql = "INSERT INTO documentos(utilizadores_id,id_sala,designacao,nome_original) VALUES('" . $utilizadores_id . "','" . $designacao . "','" . $file_name . "');";
+        $sql = "INSERT INTO documentos(utilizadores_id,id_sala,designacao,nome_original) VALUES('" . $utilizadores_id . "','" . $id_sala . "','" . $designacao . "','" . $file_name . "');";
         //echo ($sql);
         mysqli_query($conn ,$sql);    
     }
@@ -51,6 +57,7 @@ if(isset($_POST['upload'])) {
         </form>
 
         <a href="logout.php">LogOut</a>
+        <a href="index.php">PaginaInicial</a>
 
         <a href="upload/teste.txt" download="teste.txt">teste </a>
     </body>
