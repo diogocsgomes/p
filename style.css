@@ -3,7 +3,7 @@
     padding: 10px;
     text-align: right;
     text-decoration: white;
-    background: #2f3131;
+    background: #4876cc;
     color: white;
     font-size: 15px;
 }
@@ -21,15 +21,70 @@
     font-size: 16px;
 } 
 
+.button2{
+    box-align:right;
+    background-color: #ffffff; 
+    border: solid transparent;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    padding: 2px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 .titulo{
     padding: 1px;
     text-align: center;
     text-decoration: white;
-    background: #2f3131;
+    background: #4876ccf6;
     color: white;
     font-size: 30px;
 }
 
 .table{
-    box-align: center;
+  /*border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;*/
 }
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  .row {
+    margin-left:-5px;
+    margin-right:-5px;
+  }
+    
+  .column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }

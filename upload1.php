@@ -5,7 +5,8 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 {
     header('location:login.html');
 }
-$id_sala = random_int(1,10);
+$id_sala = $_GET['id_sala'];
+//$id_sala = random_int(1,10);
 //(string)$id_pasta;
 //$utilizadores_id = $_SESSION['id'];
 //echo($utilizadores_id);
