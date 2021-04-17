@@ -1,70 +1,56 @@
 <?php
 
-/*$a =$_GET['id_sala'];
-echo $a;*/
 
-$para = "diogocsgomes@gmail.com";
-$de = "emailPAP02@gmail.com";
-/*$para = "emailPAP02@gmail.com";
-$de = "diogocsgomes@gmail.com";
-*/
-$headers = "From:".$de;
-$subject = "My subject";
-$txt = "Hello world!";
+include('conectaBD.php');
+session_start();
 
+	//$sql = "SELECT * FROM salas";
+   /* $sql = "SELECT * FROM utilizadores";
 
-mail($para,$subject,$txt,$headers);
-
-
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-/*use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-//Load Composer's autoloader
-require 'phpmailer/vendor/autoload.php';
-
-//Instantiation and passing `true` enables exceptions
-$mail = new PHPMailer(true);
-
-try {
-    //Server settings
-    $mail->SMTPDebug = 1;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'emailPAP02@gmail.com';                     //SMTP username
-    $mail->Password   = 'PAP12345';                               //SMTP password
-    $mail->SMTPSecure = 'tls';         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-    $mail->Port       = 465;
-    //$mail->Port       = 993;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-
-    //Recipients
-    $mail->setFrom('emailPAP02@gmail.com');
-    $mail->addAddress('diogocsgomes02@gmail.com');     //Add a recipient
-    /*$mail->addAddress('ellen@example.com');               //Name is optional
-    $mail->addReplyTo('info@example.com', 'Information');*/
-    /*$mail->addCC('cc@example.com');
-    $mail->addBCC('bcc@example.com');*/
-
-    //Attachments
-    //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-/*
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'Se estás a ler isto ´r porqu eo consegues ler html</b>';
-    $mail->AltBody = 'Isto é para testar se consegues ler html';
-
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+	$salas = mysqli_query($conn,$sql);*/
+if (! $_SESSION['username'] or ! $_SESSION['id'])
+{
+    header('location:login.html');
 }
 
-*/
+
+$id_sala = $_GET['id_sala'];
+echo $id_sala;
+
+
+$para = $_POST['email'];
+$teste = $_POST['teste'];
+echo $teste;
+//$para = "diogocsgomes@gmail.com";
+$de = "emailPAP02@gmail.com";
+
+
+// $para = "emailPAP02@gmail.com";
+$de = "diogocsgomes@gmail.com";
+
+$headers[] = 'MIME-Version: 1.0';
+$headers[] = 'Content-type: text/html; charset=iso-8859-1';
+$headers[] = 'From: Birthday Reminder <emailPAP02@gmail.com>';
+//$headers = "From:".$de;
+$subject = "My subject";
+
+$example = "this is a example";
+$txt = 
+'
+<html>
+    Olá clike neste botão para poder aceder à pasta partolhada consigo.
+
+    <a href="http://localhost/PAP/associacoes.php?id_sala=.$id_sala."><button> botao</button></a>
+</html>
+'
+
+;
+
+
+mail($para,$subject,$txt,implode("\r\n",$headers));
+
+
+//header('location:index.php');
+
 
 ?>
