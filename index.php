@@ -2,10 +2,7 @@
 include('conectaBD.php');
 session_start();
 
-	//$sql = "SELECT * FROM salas";
-   /* $sql = "SELECT * FROM utilizadores";
-
-	$salas = mysqli_query($conn,$sql);*/
+	
 if (! $_SESSION['username'] or ! $_SESSION['id'])
 {
     header('location:login.html');
@@ -33,16 +30,66 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 <header>
 <div class="header"> 
 <title>MyClass</title>
-<h1 class="titulo">MyClass</h1>
-<a href="CriarSala.php"><button class="button2"> Crie uma nova sala</button></a>
+<h1 class="titulo"> <a href="index.php" style="color: #ffffff; text-decoration: none;">  MyClass  </a></h1>
+<a href="#"><button class="button2"> Crie uma nova sala</button></a>
 <a href="logout.php">
     <button class="button"> LogOut</button>
 </a>
 </div>
 </header>
-<div class="inserir">
-<!--<a href="upload1.php">Inserir ficheiros</a>-->
 
+
+
+
+
+<div class="bg-model">
+ 
+        <div class="model-content">
+            <div class="form" align="center">
+
+            <form action="trataSala.php" method="POST">
+                      Nome da Sala <p>
+
+</p>
+            <input type="text" id="nome" name="nome" required>
+            <p>
+                     Codigo Da Sala
+            </p> 
+            <input type="text" id="codigo" name="codigo" required><p></p>
+            <button type="submit" class="registerbtn" id="submit" name="submit">Registar</button>
+
+        </form>
+            
+            <div class="close">
+                +
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+<!--
+<div class="inserir">
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+<div id="main">
+  
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+</div>
+-->
 
 <!-- Body: coodigo em php para a listagem das pastas -->
 </div>
@@ -52,7 +99,8 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 <tbody>
 <tr>
  <th scope="col">As minhas Salas</th> 
-
+ <!--<th>Partilhe</th>-->
+</tr>
 
 
 
@@ -72,19 +120,40 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
            <td> <a href="MostraSala.php?id_sala=<?= $row['id_sala']?>"> <?php //if ($_SESSION['id'] == $row['id_criador']){
                         echo $row['nome']; ?> </a> </br></td>
                         
-
-                       <td> 
-    <button class="button" id="button" > Partilhar Sala</button>
+                        <td>               
+   <!-- <button class="button" id="button" data-id=<?//=$row['id_sala']?> > Partilhar Sala</button>-->
+    
     </td>
+             
+  
+                        <?php }?>
+                        
+                        </tbody>
+                        </table>
+
+                        <?php
+
+              $sql5 = "SELECT * FROM salas WHERE id_criador = ".$_SESSION['id'];
+       $result_set4 = mysqli_query($conn,$sql5); 
+       
+      // while ($row = mysqli_fetch_array($result_set4)) {
+           
+        //isto nao esta a funcionar porque o loop está a recolher o id do ultimo registo na base de dados, tenho que arranjar uma forma de  recolher o id certo
+           ?>
+
+
+                        
+       <!-- este model foi posto de parte-------------------------------------
+
     <div class="bg-model">
  
         <div class="model-content">
             <div class="form">
                 <br><br><h3>Com quem pertende partilhar esta sala?</h1>
-                <form action="email.php?id_sala=<?=$row['id_sala']?>" method="POST">
-                <input type="hidden" value="<?php echo   $row['id_sala']?>" name="teste" >
+                <form id="modal" action="" method="POST">
+                <input type="hidden" value="<?php// echo   $row['id_sala']?>" name="teste" >
                 <br><input type="text" name="email" placeholder="Email">
-                <br><br>  <button type="submit" class="button3" id="submit" name="submit">Compartilhar esta pasta</button>
+                <br><br>  <button type="submit" class="button3" id="submit" name="submit">Enviar Email</button>
             </div>
             </form>
             <div class="close">
@@ -92,21 +161,14 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
             </div>
         </div>
     </div>
-    
-</td>
-    
-</tr>
+    -->
+   
 </tr>
 
+                <?php//  }?>
 
-
-
-  
-                        <?php }?>
-
-                        </tbody>
-                        </table>
-
+                
+                      
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
@@ -115,8 +177,40 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 
 
 <script>
+//este javascript faz parte de um side-nav que enternato foi posto de parte----------------------------------------------
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+//---------------------------------------------------------------
+
+//este javascript faz parte de um model que enternato foi posto de parte----------------------------------------------
+
+
+
 $(document).ready(function(){
-  $(".button").click(function(){
+  $(".button4").click(function(){
+    var id = $(this).data("id");
+    $('#modal').attr('action','email.php?id_sala='+id);
+    console.log(id);
+    $(".bg-model").css("display", "flex");  
+  });
+
+  $(".close").click(function(){
+    $(".bg-model").css("display", "none");  
+  });
+});
+//--------------------------------------
+
+$(document).ready(function(){
+  $(".button2").click(function(){
+   
     $(".bg-model").css("display", "flex");  
   });
 
@@ -125,9 +219,33 @@ $(document).ready(function(){
   });
 });
 
+
+
+
 </script>
 
+<form action="trata_associacao.php" method="POST" align="left">
+<input type="text" name="codigo" id="codigo">
+<input type="submit" id="submit" name="submit" >
 
+<?php
+/*
+$encryption = $_POST['sala'];
+echo $encryption;
+
+$decryption_iv = random_bytes($iv_length);
+  
+
+$decryption_key = openssl_digest(php_uname(), 'MD5', TRUE);
+  
+
+$decryption = openssl_decrypt ($encryption, $ciphering,
+            $decryption_key, $options, $encryption_iv);
+  */
+
+?>
+
+</form>
 
 <div class="column" >
 <table >
@@ -147,7 +265,7 @@ $(document).ready(function(){
 <tr>
 
            <td> <a href="MostraSala.php?id_sala=<?= $row['id_sala']?>"> <?php //if ($_SESSION['id'] == $row['id_criador']){
-                        echo $row['id_sala']; ?> </a> </br></td>
+                        echo $row['nome']; ?> </a> </br></td>
 
 
                        <!-- <td> <a href="">Partilhar esta pasta</td>-->
@@ -173,6 +291,57 @@ $(document).ready(function(){
 
 <style>
     
+    body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+
     .bg-model{
         width: 100%;
         height: 100%;

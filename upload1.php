@@ -29,16 +29,31 @@ if(isset($_POST['upload'])) {
 
     
     //$designacao = $id_pasta +"_"+ $file_name;
+    $sql = "INSERT INTO documentos(utilizadores_id,id_sala,designacao,nome_original) VALUES('" . $utilizadores_id . "','" . $id_sala . "','" . $designacao . "','" . $file_name . "');";
 
-    if (move_uploaded_file($file_tem_Loc,$file_store)){
-        echo "os ficheiros foram enviados";
-        $sql = "INSERT INTO documentos(utilizadores_id,id_sala,designacao,nome_original) VALUES('" . $utilizadores_id . "','" . $id_sala . "','" . $designacao . "','" . $file_name . "');";
+
+   /* if (move_uploaded_file($file_tem_Loc,$file_store) and mysqli_query($conn ,$sql) ){
+        //echo "os ficheiros foram enviados";
+       // $sql = "INSERT INTO documentos(utilizadores_id,id_sala,designacao,nome_original) VALUES('" . $utilizadores_id . "','" . $id_sala . "','" . $designacao . "','" . $file_name . "');";
         //echo ($sql);
-        mysqli_query($conn ,$sql);    
+        //mysqli_query($conn ,$sql);
+        header('location:MostraSala.php?id_sala='.$id_sala.'');    
+    }*/
+
+
+    if ( mysqli_query($conn ,$sql) ){
+        //echo "os ficheiros foram enviados";
+       // $sql = "INSERT INTO documentos(utilizadores_id,id_sala,designacao,nome_original) VALUES('" . $utilizadores_id . "','" . $id_sala . "','" . $designacao . "','" . $file_name . "');";
+        //echo ($sql);
+        //mysqli_query($conn ,$sql);
+        move_uploaded_file($file_tem_Loc,$file_store);
+        header('location:MostraSala.php?id_sala='.$id_sala.'');    
     }
+
     else 
     {
-        echo"o ficheiro nao ficou armazenado na base de dados";
+        //echo"o ficheiro nao ficou armazenado na base de dados";
+        header('location:MostraSala.php?id_sala='.$id_sala.'');
     }
    
 }
@@ -47,6 +62,8 @@ if(isset($_POST['upload'])) {
 
 
 ?>
+
+<!--
 <!DOCTYPE html>
 <html>
     <header>Upload de ficheiros</header>
@@ -63,3 +80,4 @@ if(isset($_POST['upload'])) {
         <a href="upload/teste.txt" download="teste.txt">teste </a>
     </body>
 </html>
+-->

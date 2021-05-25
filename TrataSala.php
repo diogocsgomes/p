@@ -1,4 +1,5 @@
 <?php
+
 include('conectaBD.php');
 session_start();
 if (! $_SESSION['username'] or ! $_SESSION['id'])
@@ -14,11 +15,18 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 if(isset($_POST['submit'])){
     //nome da sala
     $nome = $_POST['nome'];
-    $codigo =$_POST['codigo'];
     $id_criador = $_SESSION['id'];
+
+
+    //$codigo = sha1($nome.$id_criador);
+    $salt="string";
+    $codigo = $_POST['codigo'];
+    $codigo2 = sha1($codigo.$salt);
+
     
     
-    $sql = "INSERT INTO salas(id_criador,nome,codigo) VALUES('". $id_criador ."','". $nome ."', '" .$codigo. "' )";
+    $sql = "INSERT INTO salas(id_criador,nome,codigo) VALUES('". $id_criador ."','". $nome ."', '" .$codigo2. "' )";
+    var_dump($sql);
 
     //mkdir('salas\\' . $nome. '');
     mkdir('utilizadores\\'.$_SESSION['username'].'\\'.$nome);

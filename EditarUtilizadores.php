@@ -2,7 +2,7 @@
 	include('conectaBD.php');
 	$sql = "SELECT * FROM utilizadores where id=" . $_GET['idUtilizador'];
 	$utilizador = mysqli_query($conn,$sql);  //solicitar os dados à base de dados
-	$dados_utilizador=mysqli_fetch_assoc($utilizador); //escolher uma linha
+	$dados_utilizador = mysqli_fetch_assoc($utilizador); //escolher uma linha
 ?>
 
 
