@@ -5,7 +5,8 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 {
     header('location:login.html');
 }
-$id_sala = $_GET['id_sala'];
+$id_unico = $_GET['id_unico'];
+echo $id_unico;
 //$id_sala = random_int(1,10);
 //(string)$id_pasta;
 //$utilizadores_id = $_SESSION['id'];
@@ -29,7 +30,7 @@ if(isset($_POST['upload'])) {
 
     
     //$designacao = $id_pasta +"_"+ $file_name;
-    $sql = "INSERT INTO documentos(utilizadores_id,id_sala,designacao,nome_original) VALUES('" . $utilizadores_id . "','" . $id_sala . "','" . $designacao . "','" . $file_name . "');";
+    $sql = "INSERT INTO documentos2(utilizadores_id,designacao,nome_original,id_unico) VALUES('" . $utilizadores_id . "','" . $designacao . "','" . $file_name . "','".$id_unico."');";
 
 
    /* if (move_uploaded_file($file_tem_Loc,$file_store) and mysqli_query($conn ,$sql) ){
@@ -47,13 +48,13 @@ if(isset($_POST['upload'])) {
         //echo ($sql);
         //mysqli_query($conn ,$sql);
         move_uploaded_file($file_tem_Loc,$file_store);
-        header('location:MostraSala.php?id_sala='.$id_sala.'');    
+        header('location:MostraSala.php?id_unico='.$id_unico.'');    
     }
 
     else 
     {
-        //echo"o ficheiro nao ficou armazenado na base de dados";
-        header('location:MostraSala.php?id_sala='.$id_sala.'');
+        echo"o ficheiro nao ficou armazenado na base de dados";
+        //header('location:MostraSala.php?id_unico='.$id_unico.'');
     }
    
 }

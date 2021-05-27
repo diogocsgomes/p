@@ -41,8 +41,8 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 <body>
     <?php //echo $_GET['id_sala'];
     
-    
-    $sql = "SELECT  `codigo` FROM `salas` WHERE id_sala = ".$_GET['id_sala'] ;
+    $id_unico = $_GET['id_unico'];
+    $sql = "SELECT  `codigo` FROM `salas` WHERE id_unico = '".$id_unico."'" ;
     $result_set = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result_set);
     echo "Partilhe esta sala: ".$row['codigo'];
@@ -70,7 +70,7 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 <?php 
 
 
-$sql2 = "SELECT * FROM documentos WHERE id_sala = ".$_GET['id_sala'];
+$sql2 = "SELECT * FROM documentos2 WHERE id_unico = '".$id_unico."'";
 $result_set = mysqli_query($conn,$sql2);
 while($row = mysqli_fetch_array($result_set)  )
 {
@@ -101,7 +101,7 @@ while($row = mysqli_fetch_array($result_set)  )
             </br> <br> 
             
 
-          <a href="eliminar_documentos.php?id_documento=<?php  echo $row['id']; ?>&id_sala=<?php echo $_GET['id_sala'];?>"> <button type="button" class="btn btn-primary">
+          <a href="eliminar_documentos.php?id_documento=<?php  echo $row['id']; ?>&id_unico=<?php echo $_GET['id_unico'];?>"> <button type="button" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
   <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
 </svg>
@@ -132,7 +132,7 @@ while($row = mysqli_fetch_array($result_set)  )
         <div class="form" align="center">
 <table>
 <th>
-            <form action="upload1.php?id_sala=<?= $_GET['id_sala']?>" method="POST" enctype="multipart/form-data">
+            <form action="upload1.php?id_unico=<?= $_GET['id_unico']?>" method="POST" enctype="multipart/form-data">
                 <p><input type="file" name="file" ></p>
                 <p><input type="submit" name="upload" value="Enviar Ficheiro"></p>
     

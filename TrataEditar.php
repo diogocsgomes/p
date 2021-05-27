@@ -11,7 +11,7 @@
 
 		
 		$sql = "UPDATE utilizadores SET  username='" . $username . "', email='" . $email . "' WHERE id=".$id;
-
+		
 		if (mysqli_query($conn,$sql)){ 
 			echo "alterou com exito";
 			header('location:ListarUtilizadores.php');

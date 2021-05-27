@@ -22,10 +22,11 @@ if(isset($_POST['submit'])){
     $salt="string";
     $codigo = $_POST['codigo'];
     $codigo2 = sha1($codigo.$salt);
-
+    $data = date("Y-m-d H:i:s");
+    $id_unico = sha1($nome.$id_criador.$data);
     
     
-    $sql = "INSERT INTO salas(id_criador,nome,codigo) VALUES('". $id_criador ."','". $nome ."', '" .$codigo2. "' )";
+    $sql = "INSERT INTO salas(id_criador,nome,codigo,id_unico) VALUES('". $id_criador ."','". $nome ."', '" .$codigo2. "','".$id_unico."' )";
     var_dump($sql);
 
     //mkdir('salas\\' . $nome. '');

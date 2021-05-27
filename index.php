@@ -99,6 +99,7 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 <tbody>
 <tr>
  <th scope="col">As minhas Salas</th> 
+ 
  <!--<th>Partilhe</th>-->
 </tr>
 
@@ -109,32 +110,50 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
        <?php
 
        //Mostar as salas que o utilizador criou
-       $sql3 = "SELECT * FROM salas WHERE id_criador = ".$_SESSION['id'];
-       $result_set2 = mysqli_query($conn,$sql3); 
+          $sql3 = "SELECT * FROM salas WHERE id_criador = ".$_SESSION['id'];
+              $result_set2 = mysqli_query($conn,$sql3); 
        
-       while ($row = mysqli_fetch_array($result_set2)) {
+                 while ($row = mysqli_fetch_array($result_set2)) {
            
            ?>
-           <tr>
+    
+     <tr>
 
-           <td> <a href="MostraSala.php?id_sala=<?= $row['id_sala']?>"> <?php //if ($_SESSION['id'] == $row['id_criador']){
+          <td> <a href="MostraSala.php?id_unico=<?= $row['id_unico']?>"> <?php //if ($_SESSION['id'] == $row['id_criador']){
                         echo $row['nome']; ?> </a> </br></td>
                         
-                        <td>               
+                        <td>          <a href="elemina_sala.php?id_unico=<?php echo $row['id_unico'];?>"> <button type="button" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
+</svg>
+                
+              </button>
+            </a>     
    <!-- <button class="button" id="button" data-id=<?//=$row['id_sala']?> > Partilhar Sala</button>-->
     
     </td>
-             
+             </tr>
   
                         <?php }?>
                         
+                        
                         </tbody>
                         </table>
+</div>
+</div>
+                        <?php 
 
-                        <?php
 
-              $sql5 = "SELECT * FROM salas WHERE id_criador = ".$_SESSION['id'];
-       $result_set4 = mysqli_query($conn,$sql5); 
+
+ //Listar as paginas em partilhadas com o utilizador
+       
+
+ ?>
+
+<?php
+
+              //$sql5 = "SELECT * FROM salas WHERE id_criador = ".$_SESSION['id'];
+       //$result_set4 = mysqli_query($conn,$sql5); 
        
       // while ($row = mysqli_fetch_array($result_set4)) {
            
@@ -178,7 +197,7 @@ if (! $_SESSION['username'] or ! $_SESSION['id'])
 
 <script>
 //este javascript faz parte de um side-nav que enternato foi posto de parte----------------------------------------------
-
+/*
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("main").style.marginLeft = "250px";
@@ -188,6 +207,7 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
 }
+*/
 //---------------------------------------------------------------
 
 //este javascript faz parte de um model que enternato foi posto de parte----------------------------------------------
@@ -224,9 +244,7 @@ $(document).ready(function(){
 
 </script>
 
-<form action="trata_associacao.php" method="POST" align="left">
-<input type="text" name="codigo" id="codigo">
-<input type="submit" id="submit" name="submit" >
+
 
 <?php
 /*
@@ -247,11 +265,14 @@ $decryption = openssl_decrypt ($encryption, $ciphering,
 
 </form>
 
-<div class="column" >
-<table >
+
+<table>
 <tbody>
 <tr>
- <th scope="col">Salas Subcsritas</th> 
+ <th scope="col">Salas Subscritas  <p></p>
+ <form action="trata_associacao.php" method="POST" align="left">
+<input type="text" name="codigo" id="codigo" placeholder="Codigo de sala">
+<input type="submit" id="submit" name="submit" value="Subscrever" > </th> 
 
  <?php
  //Listar as paginas em partilhadas com o utilizador
@@ -264,7 +285,7 @@ $decryption = openssl_decrypt ($encryption, $ciphering,
 
 <tr>
 
-           <td> <a href="MostraSala.php?id_sala=<?= $row['id_sala']?>"> <?php //if ($_SESSION['id'] == $row['id_criador']){
+           <td> <a href="MostraSalaPartilhada.php?id_unico=<?= $row['id_unico']?>"> <?php //if ($_SESSION['id'] == $row['id_criador']){
                         echo $row['nome']; ?> </a> </br></td>
 
 
@@ -281,8 +302,7 @@ $decryption = openssl_decrypt ($encryption, $ciphering,
 </table>
 
 
-</div>
-</div>
+
 </html>
 
 
